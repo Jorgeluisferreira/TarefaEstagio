@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 function Registro(){
     const [values, setValues] = useState();
+
   const navigate = useNavigate();
   const goToHome =() =>{
     navigate('/');
