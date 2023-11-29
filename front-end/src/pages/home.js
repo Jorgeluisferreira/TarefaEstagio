@@ -6,6 +6,7 @@ import { format } from 'date-fns';
 
 
 function Home() {
+
   const [list, setList ] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
@@ -28,10 +29,12 @@ function Home() {
   };
 
   useEffect(() => {
-    Axios.get("http://localhost:3001/getCards").then((response) => {
+    Axios.get("http://localhost:3001/getitems").then((response) => {
       setList(response.data);
     });
   }, []);
+
+
   
   const navigate = useNavigate();
   const goToRegister =() =>{
@@ -65,7 +68,18 @@ function Home() {
               <td>{item.armazenamento}</td>
               <td>{format(new Date(item.lancamento), 'dd/MM/yyyy')}</td>
               <td><button className='btn-edit' onClick={() => openModal(item)}>Editar</button></td>
-              <td><a>Excluir</a></td>
+              <td><button className='btn-edit' onClick={() => {
+                const isConfirmed = window.confirm("Tem certeza de que deseja excluir?");
+                if (isConfirmed) {
+                  Axios.delete(`http://localhost:3001/delete/${item.id}`)
+                    .then(response => {
+                      console.log("Exclusão bem-sucedida", response.data);
+                      window.location.reload(); 
+                    })
+                    .catch(error => {
+                      console.error("Erro ao excluir", error);
+                    });
+              }}}>Excluir</button></td>
             </tr>
           ))}
         </tbody>

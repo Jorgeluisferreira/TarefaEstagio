@@ -8,7 +8,7 @@ function Registro(){
 
   const navigate = useNavigate();
   const goToHome =() =>{
-    navigate('/');
+    navigate('/', { replace: true });
   }
     const handleChangeValues = (value) =>{
         setValues(prevValue=>({
