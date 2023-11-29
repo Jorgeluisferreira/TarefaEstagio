@@ -4,7 +4,18 @@ import Axios from "axios";
 import { useNavigate } from 'react-router-dom';
 
 function Registro(){
-    const [values, setValues] = useState();
+    const [values, setValues] = useState({
+        marca: '',
+        modelo: '',
+        armazenamento: '',
+        lancamento: ''
+      });
+    const [errors, setErrors] = useState({
+        marca: '',
+        modelo: '',
+        armazenamento: '',
+        lancamento: ''
+      });
 
   const navigate = useNavigate();
   const goToHome =() =>{
@@ -18,18 +29,47 @@ function Registro(){
       }
     
       const handleClickButton =() => {
+
+        let formIsValid = true;
+        const newErrors = { ...errors };
+    
+
+        if (!values.marca.trim()) {
+          formIsValid = false;
+          newErrors.marca = 'Campo obrigatório';
+        }
+    
+
+        if (!values.modelo.trim()) {
+          formIsValid = false;
+          newErrors.modelo = 'Campo obrigatório';
+        }
+    
+
+        if (isNaN(values.armazenamento)) {
+          formIsValid = false;
+          newErrors.armazenamento = 'Deve ser um número';
+        }
+    
+   
+        if (!values.lancamento) {
+          formIsValid = false;
+          newErrors.lancamento = 'Campo obrigatório';
+        }
+       
+        setErrors(newErrors);
+        if(formIsValid){
         Axios.post("http://localhost:3001/register", {
             marca: values.marca,
             modelo: values.modelo,
             armazenamento: values.armazenamento,
             lancamento: values.lancamento
-          });
-        };
-
-      const doublefunction =() =>{
-        handleClickButton();
+        });
         goToHome();
-      }
+        }else{
+            window.alert("Certifique-se que nenhum campo está errado")
+        }
+        };
 
       return (
         <div className='App-container'>
@@ -38,15 +78,15 @@ function Registro(){
                 <legend class="legend-border">Celular</legend>
                 <div className='input-container'>
                         <label className='label'>Marca</label>
-                        <input type="text" name='marca'  className='register-input' onChange={handleChangeValues}/>
+                        <input type="text" name='marca'  className='register-input' onChange={handleChangeValues} />
                     </div>
                     <div className='input-container'>
                     <label className='label'>Modelo</label>
-                    <input type="text" name='modelo'  className='register-input' onChange={handleChangeValues}/>
+                    <input type="text" name='modelo'  className='register-input' onChange={handleChangeValues} />
                     </div>
                     <div className='input-container'>
                     <label className='label'>Memoria</label>
-                    <input type="text" name='armazenamento' className='register-input' onChange={handleChangeValues}/>
+                    <input type="text" name='armazenamento' className='register-input' onChange={handleChangeValues} />
                     </div>
                     <div className='input-container'>
                     <label className='label'>Data de lançamento</label>
@@ -55,7 +95,7 @@ function Registro(){
             </fieldset>
                     <div className="button-container">
                       <button className='btn' onClick={() => goToHome()}> Cancelar </button>
-                      <button className='btn' onClick={() => doublefunction()}> Cadastrar </button>    
+                      <button className='btn' onClick={() => handleClickButton()}> Cadastrar </button>    
                     </div>
                 </div>
         </div>
