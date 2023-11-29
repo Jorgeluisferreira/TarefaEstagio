@@ -5,16 +5,6 @@ import { useNavigate } from 'react-router-dom';
 
 function Registro(){
     const [values, setValues] = useState();
-  const [list, setList ] = useState([]);
-
-
-  
-
-  useEffect(() => {
-    Axios.get("http://localhost:3001/getCards").then((response) => {
-      setList(response.data);
-    });
-  }, []);
 
   const navigate = useNavigate();
   const goToHome =() =>{
