@@ -1,0 +1,121 @@
+.App-container{
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.table-container{
+    margin-top: 10vh;
+    width: 100%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+  
+  
+th {
+    background-color: #f2f2f2;
+    padding: 8px;
+    text-align: left;
+    border: 1px solid #888;
+}
+  
+  
+td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #888;
+    border-left: 1px solid #888;
+}
+  
+td:last-child {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #888;
+    border-left: 1px solid #888;
+    border-right: 1px solid #888;
+    
+}
+  
+  
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+  
+  
+tr:hover {
+    background-color: #e5f7ff;
+}
+  
+
+.btn{
+    border: 1px solid black;
+    background-color: white;
+    width: 8rem;
+    height: 3vh;
+    font-size: 15px;
+    font-weight: bold;
+    box-shadow: .5rem .5vh black;
+    transition: .3s;
+}
+
+.btn:hover{
+    cursor: pointer;
+    width: 10rem;
+    height: 5vh;
+ 
+}
+
+.register-container{
+    width: 50%;
+    height: 50vh;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10vh;
+}
+
+.input-container{
+    width: 100%;
+    padding-right: 10rem;
+    text-align: right;
+    padding-top: 2VH;
+}
+
+.register-input{
+    width: 15rem;
+}
+
+.label{
+   margin-right: 5rem;
+}
+
+.button-container{
+    display: flex;
+    justify-content: space-around;
+    padding-left: 10rem;
+    padding-right: 10rem;
+    padding-top: 2vh;
+}
+
+.register-form {
+    border: 1px groove black !important;
+    padding: 0 1.4em 1.4em 1.4em !important;
+    margin: 0 0 1.5em 0 !important;
+    -webkit-box-shadow: 0px 0px 0px 0px #000;
+    box-shadow: 0px 0px 0px 0px #000;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+  }
+  
+.register-form .legend-border {
+    font-size: 1.2em !important;
+    text-align: left !important;
+    width: auto;
+    padding: 0 10px;
+    border-bottom: none;
+  }
