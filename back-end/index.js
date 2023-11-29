@@ -38,6 +38,26 @@ app.get("/getCards", (req, res) => {
       }
     });
 });
+
+
+app.put("/edit", (req,res)=>{
+  {
+      const {id} = req.body;
+      const {marca} = req.body;
+      const {modelo} = req.body;
+      const {armazenamento} = req.body;
+      const {lancamento} = req.body;
+
+      let sql = "UPDATE celulares SET marca=?, modelo=?, armazenamento=?, lancamento=? WHERE id=?";
+      db.query(sql, [marca,modelo,armazenamento,lancamento,id],(err,result)=>{
+          if(err){
+              console.log(err);
+          }else{
+              res.send(result);
+          }
+      })
+  }
+});
   
 
 app.listen(3001, ()=>{console.log('rodando server')});
