@@ -1,7 +1,7 @@
 import './App.css';
 import React, {useState, useEffect} from 'react';
 import Axios from "axios";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 import { format } from 'date-fns';
 
 
@@ -10,7 +10,7 @@ function Home() {
   const [list, setList ] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
- 
+  
   const openModal = (item) => {
     setSelectedItem(item);
     setModalVisible(true);
@@ -34,16 +34,11 @@ function Home() {
     });
   }, []);
 
-
   
   const navigate = useNavigate();
   const goToRegister =() =>{
     navigate('/registrar');
   }
-  const goToEdit = () =>{
-    navigate('/editar');
-  }
-
 
   return (
     <div className="App-container">

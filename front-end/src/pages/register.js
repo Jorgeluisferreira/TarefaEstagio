@@ -21,6 +21,7 @@ function Registro(){
   const goToHome =() =>{
     navigate('/', { replace: true });
   }
+
     const handleChangeValues = (value) =>{
         setValues(prevValue=>({
           ...prevValue,
@@ -28,11 +29,11 @@ function Registro(){
         }))
       }
     
+
       const handleClickButton =() => {
 
         let formIsValid = true;
         const newErrors = { ...errors };
-    
 
         if (!values.marca.trim()) {
           formIsValid = false;
@@ -69,8 +70,8 @@ function Registro(){
             modelo: values.modelo,
             armazenamento: values.armazenamento,
             lancamento: values.lancamento
-        });
-        goToHome();
+        })
+        window.location.href = '/'
         }};
 
       return (
