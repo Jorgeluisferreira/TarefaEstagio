@@ -10,6 +10,12 @@ function Home() {
   const [list, setList ] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
+  const [errors, setErrors] = useState({
+    marca: '',
+    modelo: '',
+    armazenamento: '',
+    lancamento: ''
+  });
   
   const openModal = (item) => {
     setSelectedItem(item);
@@ -87,25 +93,62 @@ function Home() {
             <span className='close' onClick={closeModal}>&times;</span>
             <fieldset className="register-form-modal">
                 <legend className="legend-border">Editar</legend>
-                <div className='input-container-modal'>
+                    <div className='input-container-modal'>
                         <label className='label'>Marca</label>
                         <input type="text" value={selectedItem.marca} onChange={handleInputChange} name='marca'  className='register-input' />
-                </div>
-                <div className='input-container-modal'>
-                    <label className='label'>Modelo</label>
-                <input type="text" value={selectedItem.modelo} onChange={handleInputChange} name='modelo'  className='register-input' />
+                        <span className="error">{errors.marca}</span>
+                    </div>
+                    <div className='input-container-modal'>
+                    <label className='label'>Modelo</label> 
+                    <input type="text" value={selectedItem.modelo} onChange={handleInputChange} name='modelo'  className='register-input' />
+                    <span className="error">{errors.modelo}</span>
                     </div>
                     <div className='input-container-modal'>
                     <label className='label'>Memoria</label>
                     <input type="text" value={selectedItem.armazenamento} onChange={handleInputChange} name='armazenamento' className='register-input' />
+                    <span className="error">{errors.armazenamento}</span>
                     </div>
                     <div className='input-container-modal'>
                     <label className='label'>Data de lançamento</label>
                     <input type="date" value={format(new Date(selectedItem.lancamento), 'yyyy-MM-dd')} onChange={handleInputChange} name='lancamento'  className='register-input' />
+                    <span className="error">{errors.lancamento}</span>
                     </div>
                     <div className="button-container-modal">
                       <button className='btn' onClick={closeModal}> Cancelar </button>
                       <button className='btn' onClick={() => {
+                        let formIsValid = true;
+                        const newErrors = { ...errors };
+                
+                        if (!selectedItem.marca.trim()) {
+                          formIsValid = false;
+                          newErrors.marca = 'Campo obrigatório';
+                        }
+                    
+                
+                        if (!selectedItem.modelo.trim()) {
+                          formIsValid = false;
+                          newErrors.modelo = 'Campo obrigatório';
+                        }
+                        
+                        if (!selectedItem.armazenamento) {
+                            formIsValid = false;
+                            newErrors.armazenamento = 'Campo obrigatorio';
+                          }
+                
+                        if (isNaN(selectedItem.armazenamento)) {
+                          formIsValid = false;
+                          newErrors.armazenamento = 'Deve ser um número';
+                
+                        }
+                    
+                   
+                        if (!selectedItem.lancamento) {
+                          formIsValid = false;
+                          newErrors.lancamento = 'Campo obrigatório';
+                        }
+                       
+                        setErrors(newErrors);
+                        if(formIsValid){
                         Axios.put("http://localhost:3001/edit", {
                             id: selectedItem.id,
                             marca: selectedItem.marca,
@@ -115,7 +158,7 @@ function Home() {
                           }).then(() =>{
                             window.location.reload();
                           })
-                      }} > Atualizar </button>    
+                      }}} > Atualizar </button>    
                     </div>        
             </fieldset>
             
